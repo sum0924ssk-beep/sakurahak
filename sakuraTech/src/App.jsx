@@ -1,35 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react'; // useStateをインポート
+import ChatRoom from './components/ChatRoom';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // 通知メッセージのダミーデータをuseStateで管理
+  const [messages, setMessages] = useState([
+    { id: 1, text: '🎉 新しいアップデートがリリースされました！', user: 'system', timestamp: '18:00' },
+    { id: 2, text: '🗓️ 明日の10:00からメンテナンスが予定されています。', user: 'system', timestamp: '17:30' },
+    { id: 3, text: '💰 期間限定セールの情報をお見逃しなく！', user: 'info', timestamp: '15:00' },
+  ]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    // App.cssのスタイルが適用されるようにclassNameを指定
+    <div className="app-container">
+      {/* ChatRoomにmessagesデータをpropsとして渡す */}
+      <ChatRoom messages={messages} />
+    </div>
+  );
 }
 
-export default App
+export default App;
