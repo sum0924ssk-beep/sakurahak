@@ -1,0 +1,6 @@
+# message-backend/requirements.txt
+fastapi
+uvicorn[standard]
+websockets
+redis  # Redisへの接続テスト用
+pydantic
