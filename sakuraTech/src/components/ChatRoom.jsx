@@ -1,5 +1,3 @@
-// components/ChatRoom.jsx (修正推奨)
-
 import React, { useEffect, useRef } from 'react';
 
 // propsのmessagesにデフォルト値として空の配列 `[]` を設定
