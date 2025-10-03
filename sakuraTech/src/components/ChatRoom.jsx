@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 
-// propsのmessagesにデフォルト値として空の配列 `[]` を設定
 const ChatRoom = ({ messages = [] }) => { 
   const endOfMessagesRef = useRef(null);
 
@@ -12,7 +11,6 @@ const ChatRoom = ({ messages = [] }) => {
     scrollToBottom();
   }, [messages]);
 
-  // messagesが空の配列の場合の表示
   if (messages.length === 0) {
     return (
       <div className="chat-room">
@@ -26,13 +24,25 @@ const ChatRoom = ({ messages = [] }) => {
       {messages.map((msg) => (
         <div
           key={msg.id}
-          // me以外のuser（system, infoなど）は全部other-messageのスタイルになる
-          className={`message-container ${msg.user === 'me' ? 'my-message' : 'other-message'}`}
+          // 'me' という名前のユーザーだったら自分のメッセージとする (今回は未使用)
+          className={`message-container ${msg.user.name === 'me' ? 'my-message' : 'other-message'}`}
         >
-          <div className="message-bubble">
-            <p className="message-text">{msg.text}</p>
+          {/* ▼ ここから追加 ▼ */}
+          <div className="message-icon">
+            {msg.user.icon}
           </div>
-          <span className="message-timestamp">{msg.timestamp}</span>
+          {/* ▲ ここまで追加 ▲ */}
+
+          {/* ▼ メッセージ本体をdivで囲む ▼ */}
+          <div className="message-content">
+            {/* ▼ ユーザー名表示を追加 ▼ */}
+            <div className="user-name">{msg.user.name}</div>
+
+            <div className="message-bubble">
+              <p className="message-text">{msg.text}</p>
+            </div>
+            <span className="message-timestamp">{msg.timestamp}</span>
+          </div>
         </div>
       ))}
       <div ref={endOfMessagesRef} />
