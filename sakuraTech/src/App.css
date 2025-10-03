@@ -1,26 +1,55 @@
+/* App.css (修正案) */
+
+/* アプリ全体のコンテナ */
 .app-container {
   display: flex;
-  justify-content: center; /* 中央寄せ */
-  align-items: center; /* 中央寄せ */
+  flex-direction: column;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #ffffff; /* 背景色を追加 */
+  background-color: #e5ddd5;
 }
 
-/* 以下、ChatRoomのためのスタイルを追記 */
+/* ヘッダーのスタイル */
+.app-header {
+  padding: 1rem;
+  color: black;
+  text-align: left;
+  flex-shrink: 0; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-.chat-room-container { /* ChatRoomを囲むコンテナ */
-  width: 100%;
-  max-width: 500px;
-  height: 90vh;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.app-header h1 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+/* 検索ボックスのスタイル */
+.search-box {
+  padding: 0.5rem;
+  padding-right: 2rem; 
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  width: 200px;
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Ccircle cx="11" cy="11" r="8"%3E%3C/circle%3E%3Cline x1="21" y1="21" x2="16.65" y2="16.65"%3E%3C/line%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 0.5rem) center; /* アイコンを右から0.5rem、上下中央に配置 */
+  background-size: 1rem 1rem; /* アイコンのサイズ */
+}
+
+
+/* チャットルームを囲むコンテナ */
+.chat-room-container {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
+/* ChatRoomコンポーネント自体のスタイル */
 .chat-room {
   flex-grow: 1;
   padding: 1rem;
@@ -31,21 +60,51 @@
   background-color: #e5ddd5;
 }
 
+/* (以降のスタイルは変更ありません) */
 .message-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-start;
   max-width: 80%;
+  gap: 0.75rem;
+}
+
+.message-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: gray;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 0.25rem;
 }
 
 .message-bubble {
   padding: 0.5rem 1rem;
   border-radius: 18px;
-  color: #333; /* 文字色を調整 */
+  color: #333;
 }
 
 .message-text {
   margin: 0;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .message-timestamp {
@@ -54,24 +113,27 @@
   margin-top: 4px;
 }
 
-/* システムメッセージなどのスタイル */
 .other-message {
   align-self: flex-start;
-  align-items: flex-start;
 }
+
+.my-message {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
 .other-message .message-bubble {
   background-color: #ffffff;
   border-top-left-radius: 0;
 }
 
-/* (もしあれば)自分のメッセージ */
-.my-message {
-  align-self: flex-end;
-  align-items: flex-end;
-}
 .my-message .message-bubble {
   background-color: #dcf8c6;
   border-top-right-radius: 0;
+}
+
+.my-message .message-timestamp {
+  align-self: flex-end;
 }
 
 .no-messages {
